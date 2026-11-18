@@ -1,0 +1,27 @@
+.root { position: absolute; inset: 0; pointer-events: none; user-select: none; }
+.desktop, .mobile { position: absolute; inset: 0; }
+.desktop { display: none; margin-inline: auto; max-width: calc(100% - 64px); }
+.figure { position: absolute; display: block; opacity: .5; }
+.musician {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: url("../../../public/christmas/hero-christmas-musicians.webp") var(--frame) 0 / 500% 100% no-repeat;
+  transform-origin: center 90%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .figure[data-bottom="true"] .musician { animation: musicSway 4.8s var(--delay) ease-in-out infinite alternate paused; }
+  .root[data-animate="true"] .musician { animation-play-state: running; }
+  :global(body:has([data-page-hidden="true"])) .root .musician { animation-play-state: paused; }
+}
+
+@keyframes musicSway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+
+@media (min-width: 761px) {
+  .desktop { display: block; }
+  .mobile { display: none; }
+}
+@media (min-width: 1151px) { .desktop { max-width: calc(100% - 112px); } }
+@media (min-width: 1481px) { .desktop { max-width: 1260px; } }
+@media print, (forced-colors: active) { .root { display: none; } }

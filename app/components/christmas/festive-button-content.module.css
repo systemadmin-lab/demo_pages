@@ -1,0 +1,105 @@
+.button {
+  --sleigh-height: 11px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.button[data-variant="hero"],
+.button[data-variant="step"],
+.button[data-variant="mobile"] {
+  --sleigh-height: 14px;
+}
+
+.button[data-variant="header"] {
+  --sleigh-height: 10px;
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+  min-width: 0;
+  font-size: inherit;
+  line-height: 1.2;
+}
+
+.track {
+  position: absolute;
+  z-index: 1;
+  right: 9px;
+  bottom: 1px;
+  left: 9px;
+  height: var(--sleigh-height);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease-out;
+}
+
+.journey {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+}
+
+.sleigh {
+  display: block;
+  width: calc(var(--sleigh-height) * 4);
+  height: var(--sleigh-height);
+  background: url('../../../public/christmas/sleigh-run-sprite.webp') 0 0 / 200% 400% no-repeat;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .button:focus-visible:not(:disabled) .track, a:focus-visible .button .track { opacity: 1; }
+  .button:focus-visible:not(:disabled) .journey, a:focus-visible .button .journey { animation: travel 2.8s linear -.6s infinite; }
+  .button:focus-visible:not(:disabled) .sleigh, a:focus-visible .button .sleigh { animation: gallop 640ms steps(1, end) infinite; }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .button:hover:not(:disabled) .track { opacity: 1; }
+  .button:hover:not(:disabled) .journey { animation: travel 2.8s linear -.6s infinite; }
+  .button:hover:not(:disabled) .sleigh { animation: gallop 640ms steps(1, end) infinite; }
+}
+
+@keyframes travel {
+  from { transform: translateX(calc(var(--sleigh-height) * -4)); }
+  to { transform: translateX(100%); }
+}
+
+:global(body:has([data-page-hidden="true"])) .button:is(:hover, :focus-visible, :active):not(:disabled) .journey,
+:global(body:has([data-page-hidden="true"])) .button:is(:hover, :focus-visible, :active):not(:disabled) .sleigh,
+:global(body:has([data-page-hidden="true"])) a:focus-visible .button .journey,
+:global(body:has([data-page-hidden="true"])) a:focus-visible .button .sleigh {
+  animation-play-state: paused;
+}
+
+/* Eight galloping poses in a two-column, four-row atlas. */
+@keyframes gallop {
+  0%, 100% { background-position: 0% 0%; }
+  12.5% { background-position: 100% 0%; }
+  25% { background-position: 0% 33.333333%; }
+  37.5% { background-position: 100% 33.333333%; }
+  50% { background-position: 0% 66.666667%; }
+  62.5% { background-position: 100% 66.666667%; }
+  75% { background-position: 0% 100%; }
+  87.5% { background-position: 100% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track { transition: none; }
+  .track { display: none; }
+}
+
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .button:active:not(:disabled) .track { opacity: 1; }
+  .button:active:not(:disabled) .journey { animation: travel 2.8s linear -.6s infinite; }
+  .button:active:not(:disabled) .sleigh { animation: gallop 640ms steps(1, end) infinite; }
+}
+
+@media print, (forced-colors: active) {
+  .track { display: none; }
+}

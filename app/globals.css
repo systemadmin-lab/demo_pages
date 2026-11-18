@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Anton";
+  src: url("/fonts/anton-400-normal.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-400-normal.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-500-normal.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-600-normal.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-700-normal.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-400-italic.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #2d2d2d;
+  --cream: #fff0dd;
+  --orange: #ff8700;
+  --blue: #079bc1;
+  --heading: #545454;
+  --font-body: "Roboto", Arial, sans-serif;
+  --font-display: "Anton", sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: var(--cream);
+  --color-heading: var(--heading);
+  --color-muse-blue: var(--blue);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+}
+
+@theme {
+  --breakpoint-phone: 431px;
+  --breakpoint-tablet: 761px;
+  --breakpoint-desktop: 1151px;
+  --breakpoint-wide: 1481px;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button {
+    font: inherit;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button, summary {
+    cursor: pointer;
+  }
+  ::selection {
+    background: #b5e5e9;
+    color: #2d2d2d;
+  }
+  :focus-visible {
+    outline: 3px solid #087f9c;
+    outline-offset: 5px;
+  }
+}
+
+@layer components {
+  .muse-button {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: linear-gradient(110deg, #ff9700, #fb7c00);
+    color: #fff;
+    transition: color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .muse-button::before,
+  .muse-button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .muse-button::before {
+    z-index: 0;
+    background: #fff;
+    transform: scale(0);
+    transition: transform 0.4s ease;
+  }
+
+  .muse-button > span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .muse-button::after {
+    z-index: 2;
+    border: 2px solid var(--orange);
+    border-radius: inherit;
+  }
+
+  .muse-button:focus-visible {
+    color: var(--orange);
+  }
+
+  .muse-button:focus-visible::before {
+    transform: scale(1);
+  }
+
+  @media (hover: hover) {
+    .muse-button:hover {
+      color: var(--orange);
+    }
+
+    .muse-button:hover::before {
+      transform: scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .muse-button,
+    .muse-button::before {
+      transition: none;
+    }
+  }
+}

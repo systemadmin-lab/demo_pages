@@ -1,0 +1,73 @@
+.root {
+  position: fixed;
+  z-index: 35;
+  inset: 0;
+  pointer-events: none;
+}
+
+.flakes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.flake {
+  position: absolute;
+  top: -16px;
+  left: var(--flake-left);
+  display: block;
+  width: var(--flake-size);
+  height: var(--flake-size);
+  color: #91bfce;
+  opacity: var(--flake-opacity);
+  animation: snowfall var(--flake-duration) var(--flake-delay) linear infinite;
+}
+
+.flake:nth-child(3n) {
+  color: #fff;
+  filter: drop-shadow(0 0 0.75px #91bfce);
+}
+
+.flake:nth-child(3n + 1) {
+  color: #69b8b1;
+}
+
+.flake svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.flakes[data-paused="true"] .flake {
+  animation-play-state: paused;
+}
+
+@keyframes snowfall {
+  from {
+    transform: translate3d(0, -16px, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(var(--flake-drift), 50vh, 0) rotate(90deg);
+  }
+  to {
+    transform: translate3d(0, calc(100vh + 32px), 0) rotate(180deg);
+  }
+}
+
+@media (max-width: 920px) {
+  .flake:nth-child(n + 13) {
+    display: none;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .root {
+    display: none;
+  }
+
+  .flake {
+    animation: none;
+  }
+}

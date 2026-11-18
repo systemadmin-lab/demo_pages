@@ -1,0 +1,11 @@
+.flights { position: absolute; inset: 0; z-index: 4; pointer-events: none; user-select: none; overflow: hidden; color: #20343e; }
+.bat { position: absolute; top: 0; left: 0; display: block; width: 65px; opacity: 0; transform-origin: center; }
+.bat svg { display: block; width: 100%; height: auto; }
+.hero { bottom: auto; height: 90px; }
+.banner { height: 100%; color: #182735; }
+.section { bottom: auto; height: 60px; }
+@media (max-width: 760px) {
+  .hero { top: auto; bottom: 20px; height: 95px; }
+  .section { height: 42px; }
+}
+@media (prefers-reduced-motion: reduce), print, (forced-colors: active) { .flights { display: none; } }

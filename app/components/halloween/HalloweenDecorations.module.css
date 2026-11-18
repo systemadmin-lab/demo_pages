@@ -1,0 +1,22 @@
+.trim { position: absolute; z-index: 31; top: 0; left: 0; right: 0; height: 100px; pointer-events: none; color: #294856; opacity: .38; }
+.webLeft, .webRight { position: absolute; top: 0; width: 68px; height: 68px; }
+.webLeft { left: 0; }
+.webRight { right: 0; transform: scaleX(-1); }
+.hero { position: absolute; inset: 0; pointer-events: none; user-select: none; }
+.pumpkin, .heroGhost, .heroHat { position: absolute; display: block; height: auto; }
+.heroPumpkinOne { left: max(24px, calc(50% - 610px)); bottom: 38px; width: 98px; transform: rotate(-9deg); }
+.heroPumpkinTwo { left: 45%; bottom: 35px; width: 112px; transform: rotate(9deg); }
+.heroPumpkinThree { top: 4px; left: 30%; width: 68px; transform: rotate(-12deg); opacity: .8; }
+.heroGhost { top: 7px; right: 7%; width: 104px; transform: rotate(12deg); }
+.heroHat { left: calc(45% + 15px); bottom: 111px; width: 86px; transform: rotate(9deg); }
+@media (max-width: 1150px) {
+  .trim { opacity: .3; }
+  .webLeft, .webRight { width: 30px; height: 30px; }
+}
+@media (max-width: 760px) {
+  .heroPumpkinOne { left: 18px; width: 68px; bottom: 32px; }
+  .heroPumpkinTwo { left: auto; right: 16px; width: 64px; bottom: 34px; }
+  .heroPumpkinThree, .heroGhost { display: none; }
+  .heroHat { left: auto; right: 20px; bottom: 76px; width: 52px; }
+}
+@media print, (forced-colors: active) { .trim, .hero { display: none; } }

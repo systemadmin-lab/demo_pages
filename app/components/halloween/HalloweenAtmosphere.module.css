@@ -1,0 +1,11 @@
+.root { position: fixed; z-index: 35; inset: 0; overflow: hidden; pointer-events: none; }
+.mote { position: absolute; bottom: -12px; left: var(--x); width: 4px; height: 4px; border-radius: 50%; background: #f1a23b; opacity: .35; animation: drift var(--duration) var(--delay) linear infinite; }
+.mote:nth-child(3n) { width: 3px; height: 3px; background: #478f9d; }
+.root[data-page-hidden="true"] .mote { animation-play-state: paused; }
+@keyframes drift {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  12%, 80% { opacity: .35; }
+  100% { transform: translate3d(28px, calc(-100vh - 24px), 0); opacity: 0; }
+}
+@media (max-width: 760px) { .mote:nth-child(n+7) { display: none; } }
+@media (prefers-reduced-motion: reduce), print, (forced-colors: active) { .root { display: none; } .mote { animation: none; } }

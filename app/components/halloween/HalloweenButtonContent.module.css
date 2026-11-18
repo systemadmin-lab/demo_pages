@@ -1,0 +1,29 @@
+.button { position: relative; isolation: isolate; overflow: hidden; --bat-play-state: paused; }
+.label { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: inherit; min-width: 0; line-height: 1.2; }
+.track { position: absolute; z-index: 1; bottom: 1px; left: 9px; right: 9px; height: 14px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity 120ms ease; }
+.button[data-variant="header"] .track { height: 11px; }
+.journey { position: absolute; inset: 0; transform: translateX(-32px); }
+.bat { display: block; width: 26px; height: 100%; color: #203044; --wing-speed: 185ms; }
+@media (prefers-reduced-motion: no-preference) {
+  .button:focus-visible { --bat-play-state: running; }
+  .button:focus-visible .track { opacity: 1; }
+  .button:focus-visible .journey { animation: batTravel 2.8s linear -.5s infinite; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .button:hover { --bat-play-state: running; }
+  .button:hover .track { opacity: 1; }
+  .button:hover .journey { animation: batTravel 2.8s linear -.5s infinite; }
+}
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .button:active { --bat-play-state: running; }
+  .button:active .track { opacity: 1; }
+  .button:active .journey { animation: batTravel 2.8s linear -.5s infinite; }
+}
+:global(body:has([data-page-hidden="true"])) .button .journey { animation-play-state: paused; }
+@keyframes batTravel {
+  0% { transform: translateX(-32px) translateY(1px); }
+  40% { transform: translateX(36%) translateY(-1px); }
+  70% { transform: translateX(68%) translateY(1px); }
+  100% { transform: translateX(100%) translateY(0); }
+}
+@media (prefers-reduced-motion: reduce), print, (forced-colors: active) { .track { display: none; } }

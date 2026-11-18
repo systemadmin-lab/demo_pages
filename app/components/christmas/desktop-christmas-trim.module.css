@@ -1,0 +1,37 @@
+.trim {
+  position: absolute;
+  /* Above the opaque mobile header, with no pointer hit area. */
+  z-index: 31;
+  inset: 0 0 auto;
+  height: 16px;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.left, .right {
+  display: none;
+  position: absolute;
+  top: 18px;
+  width: 42px;
+  aspect-ratio: 336 / 1400;
+  background: url("../../../public/christmas/hero-garland-long.webp") top center / contain no-repeat;
+}
+
+.left { left: 4px; }
+.right { right: 4px; transform: scaleX(-1); }
+.lights { position: absolute; top: 0; left: 0; width: 100%; height: 10px; }
+
+@media (min-width: 1151px) {
+  .trim { height: 270px; }
+  .left, .right { display: block; }
+  .lights { height: 14px; }
+}
+
+@media (min-width: 1481px) {
+  .left, .right { width: 60px; }
+}
+
+@media print, (forced-colors: active) {
+  .trim { display: none; }
+}

@@ -1,0 +1,16 @@
+.bat { display: block; overflow: visible; }
+.farWing { opacity: .8; }
+@media (prefers-reduced-motion: no-preference) {
+  .bat:not([data-driven="true"]) .nearWing,
+  .bat:not([data-driven="true"]) .farWing {
+    animation: flap var(--wing-speed, 185ms) linear infinite;
+    animation-play-state: var(--bat-play-state, paused);
+  }
+  :global(body:has([data-page-hidden="true"])) .bat { --bat-play-state: paused; }
+}
+/* Button-sized bats share the articulated poses; scene bats use the live rig. */
+@keyframes flap {
+  0%, 100% { d: var(--wing-up); }
+  36% { d: var(--wing-down); }
+  68% { d: var(--wing-folded); }
+}
